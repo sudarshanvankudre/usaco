@@ -46,8 +46,24 @@ def combo3(pattern):
     """Reflect and then 270 rotate"""
     return two_seventy_rotation(reflection(pattern))
 
-
 with open("transform.in", 'r') as fin:
     N = int(fin.readline())
     og = [list(fin.readline().rstrip()) for _ in range(N)]
     trans = [list(fin.readline().rstrip()) for _ in range(N)]
+
+transformation = 7
+if trans == ninety_rotation(og):
+    transformation = 1
+elif trans == one_eighty_rotation(og):
+    transformation = 2
+elif trans == two_seventy_rotation(og):
+    transformation = 3
+elif trans == reflection(og):
+    transformation = 4
+elif any((trans == combo1(og), trans == combo2(og), trans == combo3(og))):
+    transformation = 5
+elif trans == og:
+    transformation = 6
+
+with open("transform.out", 'w') as fout:
+    fout.write(str(transformation) + "\n")
