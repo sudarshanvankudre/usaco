@@ -13,7 +13,15 @@ mapping = {'2': ["A", "B", "C"], '3': ["D", "E", "F"], \
 '4': ["G", "H", "I"], '5': ["J", "K", "L"], '6': ["M", "N", "O"], \
 '7': ["P", "R", "S"], '8': ["T", "U", "V"], '9': ["W", "X", "Y"]}
 
+def possible_names(brand):
+    brand = str(brand)
+    if len(brand) == 0:
 
-def possible_names(num):
-    """Returns an iterable of all possible names based on num"""
-    num = str(num)
+    else:
+        ret_val = []
+        for m in mapping[brand[0]]:
+            ret_val.append([[m] + [c] for c in possible_names(brand[1:])])
+        return ret_val
+        return [[brand[0]] + [c] for c in possible_names(brand[1:])]
+
+print(possible_names(4734))
