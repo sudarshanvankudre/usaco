@@ -16,12 +16,10 @@ mapping = {'2': ["A", "B", "C"], '3': ["D", "E", "F"], \
 def possible_names(brand):
     brand = str(brand)
     if len(brand) == 0:
-
+        return [brand]
     else:
         ret_val = []
         for m in mapping[brand[0]]:
-            ret_val.append([[m] + [c] for c in possible_names(brand[1:])])
+            for c in possible_names(brand[1:]):
+                ret_val.append(m + c)
         return ret_val
-        return [[brand[0]] + [c] for c in possible_names(brand[1:])]
-
-print(possible_names(4734))
