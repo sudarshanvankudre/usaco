@@ -3,6 +3,8 @@ ID: sudarsh11
 LANG: PYTHON3
 TASK: namenum
 """
+import heapq
+
 names = set()
 with open("dict.txt", "r") as dictionary:
     for name in map(str.rstrip, dictionary):
@@ -18,8 +20,16 @@ def possible_names(brand):
     if len(brand) == 0:
         return [brand]
     else:
-        ret_val = []
-        for m in mapping[brand[0]]:
-            for c in possible_names(brand[1:]):
-                ret_val.append(m + c)
-        return ret_val
+        return [m + c for m in mapping[brand[0]] for c in possible_names(brand[1:])]
+
+valid_names = []
+possible = possible_names(brand)
+for n in possible:
+    if n in names:
+        heapq.heappush(valid_names, n)
+with open("namenum.out", "w") as fout:
+    if len(valid_names) == 0:
+        fout.write("NONE\n")
+    else:
+        while len(valid_names) > 0:
+            fout.write(heapq.heappop(valid_names) + "\n")
