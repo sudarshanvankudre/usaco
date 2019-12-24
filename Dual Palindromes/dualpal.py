@@ -11,7 +11,7 @@ with open("dualpal.in", "r") as fin:
 def is_palindrome(num):
     num = str(num)
     return num == num[::-1]
-          
+
 def convert(num, b):
     num = int(num)
     powers = []
@@ -24,7 +24,7 @@ def convert(num, b):
     while len(powers) > 0:
         retval += str(powers.pop())
     return retval
-    
+
 with open("dualpal.out", "w") as fout:
     possible = itertools.count(S + 1)
     for i in possible:
@@ -37,5 +37,3 @@ with open("dualpal.out", "w") as fout:
         if palindromic >= 2:
             N -= 1
             fout.write(str(i) + "\n")
-        
-            

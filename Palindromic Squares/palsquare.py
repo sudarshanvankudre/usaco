@@ -24,7 +24,7 @@ def is_palindrome(num):
         return num[:len(num) // 2] == num[len(num) // 2:][::-1]
     else:
         return num[:len(num) // 2] == num[len(num) // 2 + 1:][::-1]
-        
+
 def convert(num, B):
     """Returns num (given in base 10) in base B. num must be of type int
     >>> convert(255, 16)
@@ -47,7 +47,7 @@ def convert(num, B):
     while len(powers) > 0:
         retval += mapping[powers.pop()]
     return retval
-    
+
 with open("palsquare.in", "r") as fin:
     B = int(fin.readline())
 with open("palsquare.out", "w") as fout:
@@ -56,8 +56,3 @@ with open("palsquare.out", "w") as fout:
         if is_palindrome(squared_based):
             based = convert(n, B)
             fout.write("{} {}\n".format(based, squared_based))
-        
-   
-        
-    
-    
