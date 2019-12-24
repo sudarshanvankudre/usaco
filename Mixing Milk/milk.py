@@ -16,8 +16,8 @@ min_cost = 0
 while N > 0:
     price, amount = heapq.heappop(market)
     if amount > N:
-        min_cost += price * (amount - N)
-        N -= amount - N
+        min_cost += price * N
+        N = 0
     else:
         min_cost += price * amount
         N -= amount
