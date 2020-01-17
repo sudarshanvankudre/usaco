@@ -9,3 +9,4 @@ with open("barn1.in", "r") as fin:
 # realization: we must use all of the available boards
 # conclusion: we have to find the least wasteful partition of the stalls using
 # the max number of boards possible
+# this has to be done using some greedy search technique
