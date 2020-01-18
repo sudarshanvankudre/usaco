@@ -5,8 +5,11 @@ TASK: barn1
 """
 with open("barn1.in", "r") as fin:
     M, S, C = map(int, fin.readline().rstrip().split())
-# realization: the more 'granular' the number of boards, the less wasted space.
-# realization: we must use all of the available boards
-# conclusion: we have to find the least wasteful partition of the stalls using
-# the max number of boards possible
-# this has to be done using some greedy search technique
+    full = set()
+    for stall in map(int, fin):
+        full.add(stall)
+# we have M boards which we can use. The greedy solution is to find the best
+# solution for some amount of boards and then use that. we want to iterate
+# through every possible number of boards
+for possible_boards in range(M):
+    
