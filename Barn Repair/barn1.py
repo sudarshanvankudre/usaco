@@ -43,6 +43,7 @@ class Board:
                 if count > max_empty_length:
                     longest_start = start_stall
                     longest_stop = curr_stall - 1
+                    max_empty_length = count
                 start_stall = curr_stall
         return longest_start, longest_stop, max_empty_length
 
@@ -50,7 +51,7 @@ class Board:
         return other.empty_length == self.empty_length
 
     def __lt__(self, other):
-        return self.empty_length < other.empty_length
+        return self.empty_length > other.empty_length
 
 
 def solve():
@@ -64,21 +65,17 @@ def solve():
         highest_blocked_stall = max(highest_blocked_stall, stall_num)
         blocked_stalls.add(stall_num)
     greedy = {}
-    min_stalls_blocked = float('inf')
     board_situation = [Board(lowest_blocked_stall, highest_blocked_stall, blocked_stalls)]
     for stall_num in range(1, M + 1):
         if stall_num == 1:
-            greedy[stall_num] = [Board(lowest_blocked_stall, highest_blocked_stall, blocked_stalls)]
+            greedy[stall_num] = board_situation[0].total_blocked
         else:
-            prev_best = greedy[stall_num - 1]
-            board = heappop(prev_best)
+            board = heappop(board_situation)
             left, right = board.split()
-            heappush(prev_best, left)
-            heappush(prev_best, right)
-            greedy[stall_num] = prev_best
-        min_stalls_blocked = min(min_stalls_blocked, sum(b.total_blocked for b in greedy[stall_num]))
-    return min_stalls_blocked
-
+            heappush(board_situation, left)
+            heappush(board_situation, right)
+            greedy[stall_num] = greedy[stall_num - 1] - board.empty_length
+    return greedy[M]
 
 
 with open('barn1.in', 'r') as fin:
