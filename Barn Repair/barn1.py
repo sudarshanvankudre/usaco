@@ -71,11 +71,16 @@ def solve():
             greedy[stall_num] = board_situation[0].total_blocked
         else:
             board = heappop(board_situation)
+            if board.empty_length == 0:
+                break
             left, right = board.split()
             heappush(board_situation, left)
             heappush(board_situation, right)
             greedy[stall_num] = greedy[stall_num - 1] - board.empty_length
-    return greedy[M]
+    try:
+        return greedy[stall_num]
+    except KeyError:
+        return greedy[stall_num - 1]
 
 
 with open('barn1.in', 'r') as fin:
