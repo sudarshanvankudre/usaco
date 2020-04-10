@@ -1,3 +1,4 @@
 # usaco
-Problems from USACO Training and Contests done for fun \n
+Problems from USACO Training and Contests done for fun
+
 http://usaco.org/
