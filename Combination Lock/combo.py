@@ -12,31 +12,26 @@ with open('combo.in', 'r') as fin:
 
 def tolerance(x):
     """Returns a set of numbers that are "close" to x for combination purposes"""
-    ans = set()
+    ans = []
     for i in range(-2, 3):
-        ans.add((x - 1 + i) % N + 1)
+        ans.append((x - 1 + i) % N + 1)
     return ans
 
-def john_valid(combo):
-    """Returns true if combo is valid for john_combo"""
-    for j, i in zip(john_combo, combo):
-        # print("j: ", j)
-        # print("i: ", i)
-        if i not in tolerance(j):
-            return False
-    return True
-
-def master_valid(combo):
-    """Returns true if combo is valid for master_combo"""
-    for m, i in zip(master_combo, combo):
-        if i not in tolerance(m):
-            return False
-    return True
-
+seen = set()
 count = 0
-for c in itertools.product(range(1, N + 1), repeat=3):
-    if john_valid(c) or master_valid(c):
-        count += 1
+for x in tolerance(john_combo[0]):
+    for y in tolerance(john_combo[1]):
+        for z in tolerance(john_combo[2]):
+            if (x, y, z) not in seen:
+                seen.add((x, y, z))
+                count += 1
+
+for x in tolerance(master_combo[0]):
+    for y in tolerance(master_combo[1]):
+        for z in tolerance(master_combo[2]):
+            if (x, y, z) not in seen:
+                seen.add((x, y, z))
+                count += 1
 
 with open('combo.out', 'w') as fout:
     fout.write(str(count) + "\n")
