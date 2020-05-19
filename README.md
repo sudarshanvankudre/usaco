@@ -1,4 +1,4 @@
 # usaco
-Problems from USACO Training and Contests done for fun
+Solutions for USACO Training and Contests done for fun
 
 http://usaco.org/
